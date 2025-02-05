@@ -17,6 +17,7 @@ public class EmployeeService {
 
     private final OkHttpClient client = new OkHttpClient();
 
+    // Appel API pour récupérer la liste de tous les employés
     public List<Employee> getEmployees() {
         List<Employee> employees = new ArrayList<>();
         Request request = new Request.Builder()

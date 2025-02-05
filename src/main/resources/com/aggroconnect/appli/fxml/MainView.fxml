@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER_LEFT" spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aggroconnect.appli.controller.EmployeeController">
+    <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
+        <VBox.margin>
+            <Insets left="15.0" top="15.0"/>
+        </VBox.margin>
+        <Image url="@../images/logo_h.png"/>
+    </ImageView>
+    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="filter">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+        <padding>
+            <Insets bottom="10.0" left="15.0" right="10.0" top="10.0"/>
+        </padding>
+        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="246.0" spacing="5" styleClass="search-box">
+            <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                <Image url="@../images/search.png"/>
+            </ImageView>
+            <TextField fx:id="searchField" onKeyReleased="#handleSearch" promptText="Rechercher un employé..."
+                       styleClass="search-field"/>
+        </HBox>
+    </HBox>
+    <TableView fx:id="employeeTableView">
+        <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="150" text="Nom" />
+            <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" />
+            <TableColumn fx:id="landlineColumn" prefWidth="150" text="Téléphone Fixe" />
+            <TableColumn fx:id="cellphoneColumn" prefWidth="150" text="Téléphone Mobile" />
+        </columns>
+    </TableView>
+
+</VBox>

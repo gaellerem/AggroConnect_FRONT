@@ -7,8 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeController {
     @FXML
@@ -27,12 +29,10 @@ public class EmployeeController {
     private TableColumn<Employee, String> cellphoneColumn;
 
     @FXML
-    private TableColumn<Employee, String> departmentColumn;
-
-    @FXML
-    private TableColumn<Employee, String> siteColumn;
+    private TextField searchField;
 
     private final EmployeeService employeeService = new EmployeeService();
+    private ObservableList<Employee> employees;
 
     @FXML
     public void initialize() {
@@ -41,14 +41,29 @@ public class EmployeeController {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         landlineColumn.setCellValueFactory(cellData -> cellData.getValue().landlineProperty());
         cellphoneColumn.setCellValueFactory(cellData -> cellData.getValue().cellphoneProperty());
-        departmentColumn.setCellValueFactory(cellData -> cellData.getValue().getDepartment().nameProperty());
-        siteColumn.setCellValueFactory(cellData -> cellData.getValue().getSite().cityProperty());
 
         // Charger les données
-        List<Employee> employees = employeeService.getEmployees();
-        ObservableList<Employee> employeeObservableList = FXCollections.observableArrayList(employees);
+        List<Employee> employeesList = employeeService.getEmployees();
+        employees = FXCollections.observableArrayList(employeesList);
 
         // Remplir le tableau
-        employeeTableView.setItems(employeeObservableList);
+        employeeTableView.setItems(employees);
     }
+
+    public void handleSearch() {
+        filterEmployees(searchField.getText());
+    }
+
+    private void filterEmployees(String searchText) {
+        if (searchText == null || searchText.isEmpty()) {
+            employeeTableView.setItems(employees);
+        } else {
+            List<Employee> filtered = employees.stream()
+                    .filter(emp -> emp.getName().get().toLowerCase().contains(searchText.toLowerCase()))
+                    .collect(Collectors.toList());
+            employeeTableView.setItems(FXCollections.observableArrayList(filtered));
+        }
+    }
+
+
 }
