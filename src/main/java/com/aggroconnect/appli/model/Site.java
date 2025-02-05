@@ -1,16 +1,18 @@
 package com.aggroconnect.appli.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import lombok.Getter;
+
+@Getter
 public class Site {
-    private int id;
-    private String city;
+    private final int id;
+    private final StringProperty city;
 
     public Site(int id, String city) {
         this.id = id;
-        this.city = city;
+        this.city = new SimpleStringProperty(city);
     }
 
-    @Override
-    public String toString() {
-        return "Site{id=" + id + ", city='" + city + "'}";
-    }
+    public StringProperty cityProperty() {return city;}
 }

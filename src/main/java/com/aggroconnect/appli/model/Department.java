@@ -1,16 +1,19 @@
 package com.aggroconnect.appli.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import lombok.Getter;
+
+@Getter
 public class Department {
-    private int id;
-    private String name;
+    private final int id;
+    private final StringProperty name;
 
     public Department(int id, String name) {
         this.id = id;
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
     }
 
-    @Override
-    public String toString() {
-        return "Department{id=" + id + ", name='" + name + "'}";
-    }
+    public StringProperty nameProperty() {return name;}
+
 }
