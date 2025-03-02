@@ -35,7 +35,6 @@
     -fx-background-color: #f0a026;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
-    -fx-padding: 5px 10px;
     -fx-cursor: hand;
     -fx-font-weight: bold;
     -fx-min-width: 20px;
@@ -52,7 +51,7 @@
 }
 
 .table-view .table-row-cell:selected {
-    -fx-background-color: #ffbd5;
+    -fx-background-color: #ffbd59 !important;
 }
 
 .table-view .table-row-cell:selected .cell {

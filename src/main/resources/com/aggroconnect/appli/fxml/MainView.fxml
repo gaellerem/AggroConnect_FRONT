@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aggroconnect.appli.controller.EmployeeListController">
+<VBox alignment="CENTER" spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aggroconnect.appli.controller.EmployeeListController">
     <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
         <VBox.margin>
             <Insets left="15.0" top="15.0" />
@@ -31,16 +31,28 @@
             <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
                 <Label text="Service :" styleClass="filter-label" prefWidth="75"/>
                 <MenuButton fx:id="departmentFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
-                <Button text="X" onAction="#clearDepartmentFilter" styleClass="clear-button" />
+                <Button onAction="#clearDepartmentFilter" styleClass="clear-button">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@../images/remove.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
             <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
                 <Label text="Site :" styleClass="filter-label" prefWidth="75"/>
                 <MenuButton fx:id="siteFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
-                <Button text="X" onAction="#clearSiteFilter" styleClass="clear-button" />
+                <Button onAction="#clearSiteFilter" styleClass="clear-button" >
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@../images/remove.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </HBox>
-    <TableView fx:id="employeeTableView" styleClass="table-view">
+    <TableView fx:id="employeeTableView" styleClass="table-view" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="nameColumn" prefWidth="150" text="Nom" />
             <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" />
