@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="20" stylesheets="@../css/employee_style.css"
+      fx:id="employeePane"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.aggroconnect.appli.controller.EmployeeController">
+    <VBox.margin>
+        <Insets top="20" left="30" right="30" bottom="20" />
+    </VBox.margin>
+
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <VBox spacing="10">
+            <Label fx:id="employeeName" styleClass="employee-name"/>
+            <Label fx:id="employeeEmail" styleClass="employee-info"/>
+            <Label fx:id="employeeLandline" styleClass="employee-info"/>
+            <Label fx:id="employeeCellphone" styleClass="employee-info"/>
+            <Label fx:id="employeeDepartment" styleClass="employee-info"/>
+            <Label fx:id="employeeSite" styleClass="employee-info"/>
+        </VBox>
+    </HBox>
+
+    <Button text="Retour" onAction="#handleBack" styleClass="return-button"/>
+</VBox>
+

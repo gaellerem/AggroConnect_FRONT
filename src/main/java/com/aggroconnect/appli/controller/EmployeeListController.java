@@ -1,5 +1,6 @@
 package com.aggroconnect.appli.controller;
 
+import com.aggroconnect.appli.MainApp;
 import com.aggroconnect.appli.model.Department;
 import com.aggroconnect.appli.model.Employee;
 import com.aggroconnect.appli.model.Site;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +57,16 @@ public class EmployeeListController {
 
     public void handleSearch() {
         filterEmployees(searchField.getText());
+    }
+
+    @FXML
+    private void handleRowClick(MouseEvent event) {
+        if (event.getClickCount() == 2) { // Double clic
+            Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
+            if (selectedEmployee != null) {
+                MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeView.fxml", selectedEmployee);
+            }
+        }
     }
 
     private void loadData() {

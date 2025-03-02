@@ -1,0 +1,23 @@
+.employee-name {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.employee-info {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666666;
+}
+
+.return-button {
+    -fx-background-color: #ffbd59;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+}
+
+.return-button:hover {
+    -fx-background-color: #ff9f1a;
+}
