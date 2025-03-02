@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aggroconnect.appli.controller.EmployeeController">
+<VBox alignment="CENTER_LEFT" spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aggroconnect.appli.controller.EmployeeListController">
     <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
         <VBox.margin>
             <Insets left="15.0" top="15.0" />
@@ -30,15 +27,29 @@
             </ImageView>
             <TextField fx:id="searchField" onKeyReleased="#handleSearch" promptText="Rechercher un employé..." styleClass="search-field" />
         </HBox>
-      <ComboBox fx:id="departmentFilter" onAction="#handleSearch" prefHeight="35.0" prefWidth="150.0" promptText="Tous les services" />
-      <ComboBox fx:id="siteFilter" onAction="#handleSearch" prefHeight="35.0" prefWidth="150.0" promptText="Tous les sites" />
+        <VBox>
+            <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
+                <Label text="Service :" styleClass="filter-label" prefWidth="75"/>
+                <MenuButton fx:id="departmentFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
+                <Button text="X" onAction="#clearDepartmentFilter" styleClass="clear-button" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
+                <Label text="Site :" styleClass="filter-label" prefWidth="75"/>
+                <MenuButton fx:id="siteFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
+                <Button text="X" onAction="#clearSiteFilter" styleClass="clear-button" />
+            </HBox>
+        </VBox>
     </HBox>
-    <TableView fx:id="employeeTableView">
+    <TableView fx:id="employeeTableView" styleClass="table-view">
         <columns>
             <TableColumn fx:id="nameColumn" prefWidth="150" text="Nom" />
             <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" />
-            <TableColumn fx:id="landlineColumn" prefWidth="150" text="Téléphone Fixe" />
-            <TableColumn fx:id="cellphoneColumn" prefWidth="150" text="Téléphone Mobile" />
+            <TableColumn text="N° téléphone" prefWidth="200">
+                <columns>
+                    <TableColumn fx:id="landlineColumn" prefWidth="100" text="Fixe" />
+                    <TableColumn fx:id="cellphoneColumn" prefWidth="100" text="Mobile" />
+                </columns>
+            </TableColumn>
         </columns>
     </TableView>
 

@@ -12,7 +12,9 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/com/aggroconnect/appli/fxml/MainView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("AggroConnect");
+        stage.setMinWidth(600);
+        stage.setMinHeight(500);
         stage.setScene(scene);
         stage.show();
     }
