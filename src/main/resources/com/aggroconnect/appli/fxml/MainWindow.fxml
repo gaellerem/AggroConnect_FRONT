@@ -2,14 +2,13 @@
 
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.aggroconnect.appli.controller.MainController"
-            minHeight="500.0" minWidth="600.0">
-    <BorderPane fx:id="mainContainer">
-        <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
-        <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
-        <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
-        <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
-    </BorderPane>
-</AnchorPane>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.aggroconnect.appli.controller.MainController"
+      alignment="CENTER"
+      spacing="20">
+    <BorderPane fx:id="mainContainer"
+                maxWidth="600"
+                prefWidth="600"
+                VBox.vgrow="ALWAYS"/>
+</VBox>

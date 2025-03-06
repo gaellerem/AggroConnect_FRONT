@@ -23,6 +23,8 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("AggroConnect");
         stage.setScene(scene);
+        stage.setMinWidth(600);
+        stage.setMinHeight(500);
         stage.show();
 
         mainController.setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);

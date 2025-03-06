@@ -19,11 +19,11 @@ public class EmployeeController {
 
     public void setEmployee(Employee employee) {
         employeeName.setText(employee.nameProperty().get());
-        employeeEmail.setText("Email : " + employee.emailProperty().get());
-        employeeLandline.setText("Téléphone Fixe : " + employee.landlineProperty().get());
-        employeeCellphone.setText("Téléphone Mobile : " + employee.cellphoneProperty().get());
-        employeeDepartment.setText("Service : " + employee.getDepartment().nameProperty().get());
-        employeeSite.setText("Site : " + employee.getSite().cityProperty().get());
+        employeeEmail.setText(employee.emailProperty().get());
+        employeeLandline.setText(employee.landlineProperty().get());
+        employeeCellphone.setText(employee.cellphoneProperty().get());
+        employeeDepartment.setText(employee.getDepartment().nameProperty().get());
+        employeeSite.setText(employee.getSite().cityProperty().get());
     }
 
     @FXML
