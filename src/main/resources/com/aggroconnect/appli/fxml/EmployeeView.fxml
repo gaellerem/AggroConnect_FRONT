@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="employeePane" alignment="TOP_CENTER" spacing="20"
-      stylesheets="@../css/employee_style.css"
+      stylesheets="@../css/style.css, @../css/employee_style.css"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.aggroconnect.appli.controller.EmployeeController">
@@ -38,5 +38,5 @@
         <Label fx:id="employeeSite" styleClass="employee-info" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
     </GridPane>
 
-    <Button onAction="#handleBack" styleClass="return-button" text="Retour" />
+    <Button onAction="#handleBack" styleClass="button" text="Retour" />
 </VBox>

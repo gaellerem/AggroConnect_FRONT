@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.aggroconnect.appli.controller.AdminAccessController"
+            stylesheets="@../css/style.css">
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Accès au dashboard administrateur" styleClass="title"/>
+            <Label text="Entrez le mot de passe: "/>
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="200.0" spacing="5" styleClass="input-box">
+                <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                    <Image url="@../images/password.png" />
+                </ImageView>
+                <PasswordField fx:id="passwordField" styleClass="input-field"/>
+            </HBox>
+            <Button text="Valider" onAction="#handleValidatePassword" />
+            <Button onAction="#handleBack" styleClass="button" text="Retour" />
+        </VBox>
+    </center>
+</BorderPane>
