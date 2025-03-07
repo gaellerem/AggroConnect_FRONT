@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.aggroconnect.appli.controller.AdminAccessController"
+            fx:controller="com.aggroconnect.appli.controller.admin.AdminAccessController"
             stylesheets="@../css/style.css">
     <center>
         <VBox spacing="10" alignment="CENTER">

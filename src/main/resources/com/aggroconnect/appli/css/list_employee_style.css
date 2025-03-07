@@ -13,6 +13,14 @@
     -fx-padding: 0 5px 0 0;
 }
 
+.remove-button {
+    -fx-background-color: transparent;
+}
+
+.remove-button:hover{
+    -fx-background-color: #e3e3e3;
+}
+
 .table-view .table-row-cell:selected {
     -fx-background-color: #ffbd59 !important;
 }

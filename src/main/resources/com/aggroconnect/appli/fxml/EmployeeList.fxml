@@ -7,17 +7,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10"
+<VBox alignment="CENTER" spacing="10" maxWidth="600"
       stylesheets="@../css/style.css, @../css/list_employee_style.css"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.aggroconnect.appli.controller.EmployeeListController">
-    <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
-        <VBox.margin>
-            <Insets left="15.0" top="15.0" />
-        </VBox.margin>
-        <Image url="@../images/logo_h.png" />
-    </ImageView>
     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="filter">
         <padding>
             <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
@@ -32,9 +26,9 @@
             <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
                 <Label text="Service :" styleClass="filter-label" prefWidth="75"/>
                 <MenuButton fx:id="departmentFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
-                <Button onAction="#clearDepartmentFilter" styleClass="button">
+                <Button onAction="#clearDepartmentFilter" styleClass="remove-button">
                     <graphic>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fitHeight="24" fitWidth="24">
                             <Image url="@../images/remove.png" />
                         </ImageView>
                     </graphic>
@@ -43,9 +37,9 @@
             <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
                 <Label text="Site :" styleClass="filter-label" prefWidth="75"/>
                 <MenuButton fx:id="siteFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
-                <Button onAction="#clearSiteFilter" styleClass="button" >
+                <Button onAction="#clearSiteFilter" styleClass="remove-button" >
                     <graphic>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fitHeight="24" fitWidth="24">
                             <Image url="@../images/remove.png" />
                         </ImageView>
                     </graphic>

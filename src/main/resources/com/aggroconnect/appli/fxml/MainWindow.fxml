@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -8,7 +10,16 @@
       alignment="CENTER"
       spacing="20">
     <BorderPane fx:id="mainContainer"
-                maxWidth="600"
-                prefWidth="600"
-                VBox.vgrow="ALWAYS"/>
+                VBox.vgrow="ALWAYS">
+        <!-- Logo en haut -->
+        <top>
+            <StackPane>
+                <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../images/logo_h.png" />
+                </ImageView>
+            </StackPane>
+        </top>
+        <!-- contenu principal au centre-->
+        <center/>
+    </BorderPane>
 </VBox>

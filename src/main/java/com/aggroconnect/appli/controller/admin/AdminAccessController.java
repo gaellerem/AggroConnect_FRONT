@@ -1,4 +1,4 @@
-package com.aggroconnect.appli.controller;
+package com.aggroconnect.appli.controller.admin;
 
 import com.aggroconnect.appli.MainApp;
 import javafx.fxml.FXML;
@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
 
 public class AdminAccessController {
 
@@ -28,19 +27,10 @@ public class AdminAccessController {
     private void handleValidatePassword() {
         String enteredPassword = passwordField.getText();
         if (PASSWORD.equals(enteredPassword)) {
-            openAdminPage();
+            MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/AdminView.fxml", null);
         } else {
             showError("Mot de passe incorrect.");
         }
-    }
-
-    private void openAdminPage() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Accès administrateur activé !", ButtonType.OK);
-        alert.showAndWait();
-
-        // Charger la vue d'administration
-        // Par exemple, on pourrait appeler setContent avec la page admin
-        // mainController.setContent("/com/aggroconnect/appli/fxml/AdminPage.fxml", null);
     }
 
     private void showError(String message) {
