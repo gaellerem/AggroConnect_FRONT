@@ -26,8 +26,6 @@ public class MainApp extends Application {
         stage.setMinWidth(800);
         stage.setMinHeight(500);
         stage.show();
-
-        mainController.setContent("/com/aggroconnect/appli/fxml/AdminView.fxml", null);
     }
 
     public static void main(String[] args) {

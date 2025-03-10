@@ -2,8 +2,7 @@ package com.aggroconnect.appli.controller;
 
 import com.aggroconnect.appli.MainApp;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
 
@@ -11,7 +10,8 @@ public class AdminAccessController {
 
     @FXML
     private PasswordField passwordField;
-
+    @FXML
+    private Label errorLabel;
     private static final String PASSWORD = "admin123";
 
     @FXML
@@ -27,19 +27,14 @@ public class AdminAccessController {
     private void handleValidatePassword() {
         String enteredPassword = passwordField.getText();
         if (PASSWORD.equals(enteredPassword)) {
-            MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/AdminView.fxml", null);
+            MainApp.getMainController().authenticateAdmin();
         } else {
-            showError();
+            errorLabel.setText("Mot de passe incorrect");
         }
-    }
-
-    private void showError() {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Mot de passe incorrect.", ButtonType.OK);
-        alert.showAndWait();
     }
 
     @FXML
     public void handleBack() {
-        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+        MainApp.getMainController().logoutAdmin();
     }
 }

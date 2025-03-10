@@ -4,22 +4,75 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.aggroconnect.appli.controller.MainController"
-      alignment="CENTER"
-      spacing="20">
-    <BorderPane fx:id="mainContainer"
-                VBox.vgrow="ALWAYS">
-        <!-- Logo en haut -->
-        <top>
-            <StackPane>
-                <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../images/logo_h.png" />
-                </ImageView>
-            </StackPane>
-        </top>
-        <!-- contenu principal au centre-->
-        <center/>
-    </BorderPane>
-</VBox>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<BorderPane fx:id="mainContainer"
+            stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.aggroconnect.appli.controller.MainController">
+    <top>
+        <StackPane>
+            <ImageView fitHeight="56.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../images/logo_h.png" />
+            </ImageView>
+        </StackPane>
+    </top>
+    <!-- Menu latéral (masqué par défaut) -->
+    <left>
+        <VBox fx:id="sidebar" spacing="15" styleClass="dashboard" visible="false" managed="false">
+            <fx:define>
+                <ToggleGroup fx:id="menuGroup" />
+            </fx:define>
+            <ToggleButton text="Employés"
+                          styleClass="button, menu-button"
+                          maxWidth="Infinity"
+                          toggleGroup="$menuGroup"
+                          selected="true"
+            >
+                <graphic>
+                    <ImageView fitHeight="30" fitWidth="30">
+                        <Image url="@../images/employees.png" />
+                    </ImageView>
+                </graphic>
+            </ToggleButton>
+            <ToggleButton text="Sites"
+                          styleClass="button, menu-button"
+                          maxWidth="Infinity"
+                          toggleGroup="$menuGroup">
+                <graphic>
+                    <ImageView fitHeight="30" fitWidth="30">
+                        <Image url="@../images/sites.png" />
+                    </ImageView>
+                </graphic>
+            </ToggleButton>
+            <ToggleButton text="Départements"
+                          styleClass="button, menu-button"
+                          maxWidth="Infinity"
+                          toggleGroup="$menuGroup">
+                <graphic>
+                    <ImageView fitHeight="30" fitWidth="30">
+                        <Image url="@../images/departments.png" />
+                    </ImageView>
+                </graphic>
+            </ToggleButton>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Déconnexion"
+                    maxWidth="Infinity"
+                    onAction="#logoutAdmin">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@../images/back.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <!-- Contenu principal -->
+    <center>
+        <StackPane fx:id="contentArea"/>
+    </center>
+</BorderPane>
+

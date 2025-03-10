@@ -17,6 +17,7 @@
                 </ImageView>
                 <PasswordField fx:id="passwordField" styleClass="input-field"/>
             </HBox>
+            <Label fx:id="errorLabel" styleClass="error"/>
             <Button text="Valider" onAction="#handleValidatePassword" />
             <Button onAction="#handleBack" styleClass="button" text="Retour" />
         </VBox>
