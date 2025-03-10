@@ -1,41 +1,35 @@
 package com.aggroconnect.appli.service;
 
 import com.aggroconnect.appli.model.Site;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SiteService {
-    private final OkHttpClient client = new OkHttpClient();
+    private static final String BASE_URL = "http://localhost:8080/api/site";
 
     public List<Site> getSites() {
-        List<Site> sites = new ArrayList<>();
-        Request request = new Request.Builder()
-                .url("http://localhost:8080/api/site")
-                .build();
+        return ApiClient.getList(BASE_URL, json ->
+                new Site(json.getInt("id"), json.getString("city"))
+        );
+    }
 
-        try (Response response = client.newCall(request).execute()){
-            if (response.isSuccessful()){
-                JSONArray jsonArray = new JSONArray(response.body().string());
+    public void addSite(Site site, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("city", site.cityProperty().get());
 
-                for (int i = 0; i < jsonArray.length(); i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+        ApiClient.addEntity(BASE_URL, jsonObject, onSuccess);
+    }
 
-                    int id = jsonObject.getInt("id");
-                    String city = jsonObject.getString("city");
-                    Site site = new Site(id, city);
-                    sites.add(site);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sites;
+    public void updateSite(Site site, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", site.getId());
+        jsonObject.put("city", site.cityProperty().get());
+
+        ApiClient.updateEntity(BASE_URL + "/" + site.getId(), jsonObject, onSuccess);
+    }
+
+    public void deleteSite(Site site) {
+        ApiClient.deleteEntity(BASE_URL + "/" + site.getId());
     }
 }

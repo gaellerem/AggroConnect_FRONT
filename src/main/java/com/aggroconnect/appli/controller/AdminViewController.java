@@ -1,4 +1,4 @@
-package com.aggroconnect.appli.controller.admin;
+package com.aggroconnect.appli.controller;
 
 import com.aggroconnect.appli.MainApp;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ public class AdminViewController {
 
     @FXML
     private void initialize() {
-        menuGroup.selectToggle(menuGroup.getToggles().getFirst());
+        setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
         menuGroup.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
             if (newToggle != null) {
                 ToggleButton selectedButton = (ToggleButton) menuGroup.getSelectedToggle();
@@ -27,13 +27,13 @@ public class AdminViewController {
 
                 switch (text) {
                     case "Employés":
-                        setContent("/com/aggroconnect/appli/fxml/admin/EmployeeList.fxml");
+                        setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
                         break;
                     case "Sites":
-                        setContent("/com/aggroconnect/appli/fxml/admin/SiteList.fxml");
+                        setContent("/com/aggroconnect/appli/fxml/SiteList.fxml");
                         break;
                     case "Départements":
-                        setContent("/com/aggroconnect/appli/fxml/admin/DepartmentList.fxml");
+                        setContent("/com/aggroconnect/appli/fxml/DepartmentList.fxml");
                         break;
                 }
             }

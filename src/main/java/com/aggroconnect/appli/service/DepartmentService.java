@@ -1,41 +1,35 @@
 package com.aggroconnect.appli.service;
 
 import com.aggroconnect.appli.model.Department;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentService {
-    private final OkHttpClient client = new OkHttpClient();
+    private static final String BASE_URL = "http://localhost:8080/api/department";
 
     public List<Department> getDepartments() {
-        List<Department> departments = new ArrayList<>();
-        Request request = new Request.Builder()
-                .url("http://localhost:8080/api/department")
-                .build();
+        return ApiClient.getList(BASE_URL, json ->
+                new Department(json.getInt("id"), json.getString("name"))
+        );
+    }
 
-        try (Response response = client.newCall(request).execute()){
-            if (response.isSuccessful()){
-                JSONArray jsonArray = new JSONArray(response.body().string());
+    public void addDepartment(Department department, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", department.nameProperty().get());
 
-                for (int i = 0; i < jsonArray.length(); i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+        ApiClient.addEntity(BASE_URL, jsonObject, onSuccess);
+    }
 
-                    int id = jsonObject.getInt("id");
-                    String name = jsonObject.getString("name");
-                    Department department = new Department(id, name);
-                    departments.add(department);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return departments;
+    public void updateDepartment(Department department, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", department.getId());
+        jsonObject.put("name", department.nameProperty().get());
+
+        ApiClient.updateEntity(BASE_URL + "/" + department.getId(), jsonObject, onSuccess);
+    }
+
+    public void deleteDepartment(Department department) {
+        ApiClient.deleteEntity(BASE_URL + "/" + department.getId());
     }
 }

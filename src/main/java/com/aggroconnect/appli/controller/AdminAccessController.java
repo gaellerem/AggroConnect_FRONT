@@ -1,4 +1,4 @@
-package com.aggroconnect.appli.controller.admin;
+package com.aggroconnect.appli.controller;
 
 import com.aggroconnect.appli.MainApp;
 import javafx.fxml.FXML;
@@ -29,12 +29,12 @@ public class AdminAccessController {
         if (PASSWORD.equals(enteredPassword)) {
             MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/AdminView.fxml", null);
         } else {
-            showError("Mot de passe incorrect.");
+            showError();
         }
     }
 
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+    private void showError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Mot de passe incorrect.", ButtonType.OK);
         alert.showAndWait();
     }
 

@@ -13,5 +13,4 @@ module com.aggroconnect.appli {
     opens com.aggroconnect.appli.model to javafx.fxml;
     opens com.aggroconnect.appli.service to javafx.fxml;
     exports com.aggroconnect.appli;
-    opens com.aggroconnect.appli.controller.admin to javafx.fxml;
 }

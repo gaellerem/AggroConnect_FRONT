@@ -7,7 +7,7 @@
 <?import javafx.scene.image.Image?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.aggroconnect.appli.controller.admin.AdminViewController"
+            fx:controller="com.aggroconnect.appli.controller.AdminViewController"
             stylesheets="@../css/style.css, @../css/admin_style.css ">
 
     <!-- Menu latéral à gauche -->
@@ -19,7 +19,9 @@
             <ToggleButton text="Employés"
                           styleClass="button, menu-button"
                           maxWidth="Infinity"
-                          toggleGroup="$menuGroup">
+                          toggleGroup="$menuGroup"
+                          selected="true"
+            >
                 <graphic>
                     <ImageView fitHeight="30" fitWidth="30">
                         <Image url="@../images/employees.png" />
@@ -63,7 +65,7 @@
     <!-- Contenu principal au centre -->
     <center>
         <VBox alignment="CENTER" spacing="20">
-            <StackPane fx:id="contentArea"/>
+            <StackPane fx:id="contentArea" VBox.vgrow="ALWAYS"/>
         </VBox>
     </center>
 </BorderPane>
