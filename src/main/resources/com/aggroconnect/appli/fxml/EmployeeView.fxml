@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <VBox fx:id="employeePane" alignment="TOP_CENTER" spacing="20"
       stylesheets="@../css/style.css, @../css/employee_style.css"
       xmlns="http://javafx.com/javafx/23.0.1"
@@ -37,6 +38,9 @@
         <Label text="Site :" styleClass="employee-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
         <Label fx:id="employeeSite" styleClass="employee-info" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
     </GridPane>
-
-    <Button onAction="#handleBack" styleClass="button" text="Retour" />
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="editButton" onAction="#editEmployee" styleClass="button" text="Modifier" visible="false"/>
+        <Button fx:id="deleteButton" onAction="#deleteEmployee" styleClass="button" text="Supprimer" visible="false"/>
+        <Button onAction="#handleBack" styleClass="button" text="Retour" />
+    </HBox>
 </VBox>

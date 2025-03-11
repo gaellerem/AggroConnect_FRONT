@@ -26,7 +26,7 @@
                 <ToggleGroup fx:id="menuGroup" />
             </fx:define>
             <ToggleButton text="Employés"
-                          styleClass="button, menu-button"
+                          styleClass="button, dashboard-button"
                           maxWidth="Infinity"
                           toggleGroup="$menuGroup"
                           selected="true"
@@ -38,7 +38,7 @@
                 </graphic>
             </ToggleButton>
             <ToggleButton text="Sites"
-                          styleClass="button, menu-button"
+                          styleClass="button, dashboard-button"
                           maxWidth="Infinity"
                           toggleGroup="$menuGroup">
                 <graphic>
@@ -48,7 +48,7 @@
                 </graphic>
             </ToggleButton>
             <ToggleButton text="Départements"
-                          styleClass="button, menu-button"
+                          styleClass="button, dashboard-button"
                           maxWidth="Infinity"
                           toggleGroup="$menuGroup">
                 <graphic>
@@ -60,7 +60,8 @@
             <Region VBox.vgrow="ALWAYS"/>
             <Button text="Déconnexion"
                     maxWidth="Infinity"
-                    onAction="#logoutAdmin">
+                    onAction="#logoutAdmin"
+                    styleClass="button, dashboard-button">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@../images/back.png" />
@@ -72,7 +73,7 @@
 
     <!-- Contenu principal -->
     <center>
-        <StackPane fx:id="contentArea"/>
+        <StackPane/>
     </center>
 </BorderPane>
 

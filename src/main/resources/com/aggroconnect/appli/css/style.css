@@ -46,12 +46,12 @@
     -fx-background-color: #ffbd59;
     -fx-background-radius: 0 10 10 0;
 }
-.menu-button {
+.dashboard-button {
     -fx-padding: 5;
     -fx-alignment: CENTER_LEFT;
 }
 
-.menu-button:hover{
+.dashboard-button:hover{
     -fx-background-radius: 0 10 10 0;
 }
 

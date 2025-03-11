@@ -19,6 +19,14 @@ import java.util.stream.Collectors;
 
 public class EmployeeListController {
     @FXML
+    private Button addButton;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private MenuButton departmentFilter;
+    @FXML
+    private MenuButton siteFilter;
+    @FXML
     private TableView<Employee> employeeTableView;
     @FXML
     private TableColumn<Employee, String> nameColumn;
@@ -28,12 +36,7 @@ public class EmployeeListController {
     private TableColumn<Employee, String> landlineColumn;
     @FXML
     private TableColumn<Employee, String> cellphoneColumn;
-    @FXML
-    private TextField searchField;
-    @FXML
-    private MenuButton departmentFilter;
-    @FXML
-    private MenuButton siteFilter;
+
 
     private final EmployeeService employeeService = new EmployeeService();
     private final DepartmentService departmentService = new DepartmentService();
@@ -45,6 +48,8 @@ public class EmployeeListController {
 
     @FXML
     public void initialize() {
+        addButton.setVisible(MainApp.getMainController().isAuthenticated());
+
         // Lier les colonnes aux propriétés de l'objet Employee
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
@@ -150,6 +155,11 @@ public class EmployeeListController {
         handleSearch();
     }
 
+    @FXML
+    public void addEmployee() {
+        MainApp.getMainController().setEmployeeViewMode(null, true);
+    }
+
     private boolean matchesDepartment(Employee emp, List<Department> selectedDepartments) {
         if (selectedDepartments.isEmpty()) {
             return true; // Pas de filtre appliqué
@@ -193,4 +203,5 @@ public class EmployeeListController {
             menuButton.setText(selectedItems);
         }
     }
+
 }

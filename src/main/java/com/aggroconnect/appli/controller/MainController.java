@@ -17,7 +17,7 @@ import java.io.IOException;
 public class MainController {
     private boolean ctrlPressed = false;
     private boolean altPressed = false;
-    private boolean isAdmin = false;
+    private boolean isAdmin = true;
 
     @FXML
     BorderPane mainContainer;
@@ -111,4 +111,36 @@ public class MainController {
         isAdmin = false;
         setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
     }
+
+    public boolean isAuthenticated() {
+        return isAdmin;
+    }
+
+    public void setEmployeeViewMode(Employee employee, boolean isEditMode) {
+        try {
+            FXMLLoader loader;
+
+            if (isEditMode) {
+                loader = new FXMLLoader(MainApp.class.getResource("/com/aggroconnect/appli/fxml/EmployeeForm.fxml"));
+            } else {
+                loader = new FXMLLoader(MainApp.class.getResource("/com/aggroconnect/appli/fxml/EmployeeView.fxml"));
+            }
+
+            Parent view = loader.load();
+
+            if (isEditMode) {
+                EmployeeFormController controller = loader.getController();
+                controller.setEmployee(employee);
+            } else {
+                EmployeeController controller = loader.getController();
+                controller.setEmployee(employee);
+            }
+
+            mainContainer.setCenter(view);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
