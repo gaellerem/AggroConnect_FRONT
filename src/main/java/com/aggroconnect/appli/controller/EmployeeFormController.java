@@ -79,7 +79,7 @@ public class EmployeeFormController {
 
         if (currentEmployee == null) {
             employee = new Employee(0, name, email, landline, cellphone, department, site);
-            employeeService.addEmployee(employee);
+            employee = employeeService.addEmployee(employee);
         } else {
             employee = new Employee(currentEmployee.getId(), name, email, landline, cellphone, department, site);
             employeeService.updateEmployee(employee, null);

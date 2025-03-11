@@ -32,7 +32,7 @@ public class EmployeeService {
         return ApiClient.getList(BASE_URL, employeeMapper);
     }
 
-    public void addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", employee.nameProperty().get());
         jsonObject.put("email", employee.emailProperty().get());
@@ -41,7 +41,7 @@ public class EmployeeService {
         jsonObject.put("departmentId", employee.getDepartment().getId());
         jsonObject.put("siteId", employee.getSite().getId());
 
-        ApiClient.addEntity(BASE_URL, jsonObject, null);
+        return ApiClient.addEmployee(BASE_URL, jsonObject, employeeMapper);
     }
 
     public void updateEmployee(Employee employee, Runnable onSuccess) {
