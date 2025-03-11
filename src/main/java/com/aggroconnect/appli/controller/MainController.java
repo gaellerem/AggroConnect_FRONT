@@ -70,8 +70,11 @@ public class MainController {
                         case "Sites":
                             setContent("/com/aggroconnect/appli/fxml/SiteList.fxml", null);
                             break;
-                        case "Départements":
+                        case "Services":
                             setContent("/com/aggroconnect/appli/fxml/DepartmentList.fxml", null);
+                            break;
+                        case "Statistiques":
+                            setContent("/com/aggroconnect/appli/fxml/EmployeeStats.fxml", null);
                             break;
                     }
                 }

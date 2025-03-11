@@ -55,7 +55,7 @@
     -fx-background-radius: 0 10 10 0;
 }
 
-.menu-button:selected {
+.dashboard-button:selected {
     -fx-background-color: #ff9f1a;
     -fx-text-fill: white;
     -fx-background-radius: 0 10 10 0;

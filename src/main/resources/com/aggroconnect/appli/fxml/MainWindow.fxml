@@ -47,13 +47,23 @@
                     </ImageView>
                 </graphic>
             </ToggleButton>
-            <ToggleButton text="Départements"
+            <ToggleButton text="Services"
                           styleClass="button, dashboard-button"
                           maxWidth="Infinity"
                           toggleGroup="$menuGroup">
                 <graphic>
                     <ImageView fitHeight="30" fitWidth="30">
                         <Image url="@../images/departments.png" />
+                    </ImageView>
+                </graphic>
+            </ToggleButton>
+            <ToggleButton text="Statistiques"
+                          styleClass="button, dashboard-button"
+                          maxWidth="Infinity"
+                          toggleGroup="$menuGroup">
+                <graphic>
+                    <ImageView fitHeight="30" fitWidth="30">
+                        <Image url="@../images/stats.png" />
                     </ImageView>
                 </graphic>
             </ToggleButton>
