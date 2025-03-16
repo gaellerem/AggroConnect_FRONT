@@ -16,6 +16,7 @@ public class EmployeeFormController {
     @FXML private TextField cellphoneField;
     @FXML private ComboBox<Department> departmentComboBox;
     @FXML private ComboBox<Site> siteComboBox;
+    @FXML private Label errorLabel;
 
     private Employee currentEmployee;
     private final EmployeeService employeeService = new EmployeeService();
@@ -76,6 +77,11 @@ public class EmployeeFormController {
         String cellphone = cellphoneField.getText();
         Department department = departmentComboBox.getValue();
         Site site = siteComboBox.getValue();
+
+        if (name.isEmpty() || email.isEmpty() || landline.isEmpty() || cellphone.isEmpty() || department == null || site == null) {
+            errorLabel.setText("Veuillez remplir tous les champs");
+            return;
+        }
 
         if (currentEmployee == null) {
             employee = new Employee(0, name, email, landline, cellphone, department, site);

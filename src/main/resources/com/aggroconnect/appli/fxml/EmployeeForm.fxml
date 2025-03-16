@@ -43,6 +43,8 @@
         <ComboBox fx:id="siteComboBox" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
     </GridPane>
 
+    <Label fx:id="errorLabel" styleClass="error"/>
+
     <HBox spacing="10" alignment="CENTER">
         <Button onAction="#handleSave" styleClass="button" text="Enregistrer"/>
         <Button onAction="#handleCancel" styleClass="button" text="Annuler"/>
