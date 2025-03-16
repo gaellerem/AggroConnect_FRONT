@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" maxWidth="600"
+<VBox alignment="CENTER" spacing="10" maxWidth="870"
       stylesheets="@../css/style.css, @../css/list_employee_style.css"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -64,6 +64,8 @@
                     <TableColumn fx:id="cellphoneColumn" prefWidth="100" text="Mobile" />
                 </columns>
             </TableColumn>
+            <TableColumn fx:id="departmentColumn" prefWidth="150" text="Service"/>
+            <TableColumn fx:id="siteColumn" prefWidth="150" text="Site"/>
         </columns>
     </TableView>
 

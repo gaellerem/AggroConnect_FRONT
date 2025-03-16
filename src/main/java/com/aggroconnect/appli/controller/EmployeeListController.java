@@ -36,6 +36,10 @@ public class EmployeeListController {
     private TableColumn<Employee, String> landlineColumn;
     @FXML
     private TableColumn<Employee, String> cellphoneColumn;
+    @FXML
+    private TableColumn<Employee, String> departmentColumn;
+    @FXML
+    private TableColumn<Employee, String> siteColumn;
 
 
     private final EmployeeService employeeService = new EmployeeService();
@@ -55,7 +59,8 @@ public class EmployeeListController {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         landlineColumn.setCellValueFactory(cellData -> cellData.getValue().landlineProperty());
         cellphoneColumn.setCellValueFactory(cellData -> cellData.getValue().cellphoneProperty());
-
+        departmentColumn.setCellValueFactory(cellData -> cellData.getValue().getDepartment().nameProperty());
+        siteColumn.setCellValueFactory(cellData -> cellData.getValue().getSite().cityProperty());
         // Charger les données
         loadData();
     }

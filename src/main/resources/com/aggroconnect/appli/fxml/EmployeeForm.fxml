@@ -19,8 +19,6 @@
         <Insets bottom="20" left="30" right="30" top="20" />
     </VBox.margin>
 
-    <Label text="Créer un Employé"/>
-
     <GridPane hgap="20" vgap="10" alignment="CENTER">
         <GridPane.margin>
             <Insets left="20" />

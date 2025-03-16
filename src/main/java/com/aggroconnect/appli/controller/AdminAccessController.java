@@ -35,6 +35,6 @@ public class AdminAccessController {
 
     @FXML
     public void handleBack() {
-        MainApp.getMainController().logoutAdmin();
+        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
     }
 }

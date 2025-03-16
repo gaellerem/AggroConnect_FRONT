@@ -3,8 +3,8 @@ package com.aggroconnect.appli.controller;
 import com.aggroconnect.appli.MainApp;
 import com.aggroconnect.appli.model.Employee;
 import javafx.application.Platform;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class MainController {
     private boolean ctrlPressed = false;
     private boolean altPressed = false;
-    private boolean isAdmin = true;
+    private boolean isAdmin = false;
 
     @FXML
     BorderPane mainContainer;
@@ -31,20 +31,22 @@ public class MainController {
         Platform.runLater(() -> {
             Stage stage = (Stage) mainContainer.getScene().getWindow();
 
-            // Écouter les événements de touches dans la scène principale
+            // Écouter les événements de touches dans la scène principale si l'utilisateur n'est pas connecté admin
             stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                // Vérifier si Ctrl ou Alt sont pressés
-                if (event.getCode().toString().equals("CONTROL")) {
-                    ctrlPressed = true;
-                }
-                if (event.getCode().toString().equals("ALT")) {
-                    altPressed = true;
-                }
+                if(!isAdmin) {
+                    // Vérifier si Ctrl ou Alt sont pressés
+                    if (event.getCode().toString().equals("CONTROL")) {
+                        ctrlPressed = true;
+                    }
+                    if (event.getCode().toString().equals("ALT")) {
+                        altPressed = true;
+                    }
 
-                // Vérifier si la touche "A" est pressée lorsque Ctrl + Alt sont maintenus
-                if (ctrlPressed && altPressed && event.getCode().toString().equals("A")) {
-                    // Si la combinaison est correcte, demander un mot de passe
-                    setContent("/com/aggroconnect/appli/fxml/AdminAccess.fxml", null);
+                    // Vérifier si la touche "A" est pressée lorsque Ctrl + Alt sont maintenus
+                    if (ctrlPressed && altPressed && event.getCode().toString().equals("A")) {
+                        // Si la combinaison est correcte, demander un mot de passe
+                        setContent("/com/aggroconnect/appli/fxml/AdminAccess.fxml", null);
+                    }
                 }
             });
 
@@ -96,13 +98,27 @@ public class MainController {
 
             mainContainer.setCenter(view);
 
-            // Afficher ou masquer le menu latéral selon l'état admin
-            sidebar.setVisible(isAdmin);
-            sidebar.setManaged(isAdmin);
-
         } catch (IOException e) {
-            e.printStackTrace();
+            showFallbackDashboard(fxmlPath, employee);
         }
+        // Afficher ou masquer le menu latéral selon l'état admin
+        sidebar.setVisible(isAdmin);
+        sidebar.setManaged(isAdmin);
+    }
+
+    private void showFallbackDashboard(String content, Employee employee) {
+        Label errorMessage = new Label("Impossible de charger les données. Vérifiez votre connexion.");
+        errorMessage.setStyle("-fx-font-size: 16px; -fx-text-fill: red; -fx-padding: 10px;");
+
+        Button retryButton = new Button("Réessayer");
+        retryButton.setStyle("-fx-font-size: 14px; -fx-padding: 5px 10px;");
+        retryButton.setOnAction(event -> setContent(content, employee));
+
+        VBox placeholder = new VBox(errorMessage, retryButton);
+        placeholder.setAlignment(Pos.CENTER);
+        placeholder.setSpacing(10);
+
+        mainContainer.setCenter(placeholder);
     }
 
     public void authenticateAdmin() {
