@@ -27,7 +27,7 @@ public class SiteListController {
 
     @FXML
     public void initialize() {
-        // Lier les colonnes aux propriétés de l'objet Employee
+        // lier les colonnes aux propriétés de l'objet Employee
         cityColumn.setCellValueFactory(cellData -> cellData.getValue().cityProperty());
         
         // gérer la modification d'un élément

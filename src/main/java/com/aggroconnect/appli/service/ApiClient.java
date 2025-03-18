@@ -27,7 +27,10 @@ public class ApiClient {
                         .mapToObj(i -> mapper.apply(jsonArray.getJSONObject(i)))
                         .collect(Collectors.toList());
             }
-            throw new IOException("Erreur API : " + response.code());
+            else {
+                handleErrorResponse(response);
+                return List.of();
+            }
         } catch (IOException e) {
             throw new RuntimeException("Erreur réseau : " + e.getMessage(), e);
         }
@@ -58,7 +61,8 @@ public class ApiClient {
                 JSONObject data = responseObject.getJSONObject("data");
                 return mapper.apply(data);
             } else {
-                throw new IOException("Échec de la requête : " + response.code());
+                handleErrorResponse(response);
+                return null;
             }
         } catch (IOException e) {
             throw new RuntimeException("Erreur réseau : " + e.getMessage(), e);

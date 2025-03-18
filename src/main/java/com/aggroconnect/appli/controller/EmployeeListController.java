@@ -162,7 +162,7 @@ public class EmployeeListController {
 
     @FXML
     public void addEmployee() {
-        MainApp.getMainController().setEmployeeViewMode(null, true);
+        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeForm.fxml", null, true);
     }
 
     private boolean matchesDepartment(Employee emp, List<Department> selectedDepartments) {

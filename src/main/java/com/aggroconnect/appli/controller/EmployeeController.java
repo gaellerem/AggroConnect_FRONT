@@ -41,12 +41,12 @@ public class EmployeeController {
 
     @FXML
     public void handleBack() {
-        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
     }
 
     @FXML
     public void editEmployee() {
-        MainApp.getMainController().setEmployeeViewMode(employee, true);
+        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeForm.fxml", employee, true);
     }
 
     @FXML
@@ -68,7 +68,7 @@ public class EmployeeController {
                         e.getMessage()
                 ).showAndWait();
             }
-            MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+            handleBack();
         }
     }
 

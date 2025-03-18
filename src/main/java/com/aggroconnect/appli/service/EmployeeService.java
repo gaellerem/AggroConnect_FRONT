@@ -33,6 +33,7 @@ public class EmployeeService {
     }
 
     public Employee addEmployee(Employee employee) {
+        // recréer l'objet json avec les id du service et du site
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", employee.nameProperty().get());
         jsonObject.put("email", employee.emailProperty().get());
@@ -41,14 +42,11 @@ public class EmployeeService {
         jsonObject.put("departmentId", employee.getDepartment().getId());
         jsonObject.put("siteId", employee.getSite().getId());
 
-        // Ajoute l'employé et extrait les données depuis "data"
-        return ApiClient.addEmployee(BASE_ENDPOINT, jsonObject, jsonResponse -> {
-            JSONObject data = jsonResponse.getJSONObject("data"); // extraction de "data"
-            return employeeMapper.apply(data);  // mapper l'objet de la réponse
-        });
+        return ApiClient.addEmployee(BASE_ENDPOINT, jsonObject, employeeMapper);
     }
 
-    public void updateEmployee(Employee employee, Runnable onSuccess) {
+    public void updateEmployee(Employee employee) {
+        // recréer l'objet json avec les id du service et du site
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", employee.getId());
         jsonObject.put("name", employee.nameProperty().get());
@@ -58,7 +56,7 @@ public class EmployeeService {
         jsonObject.put("departmentId", employee.getDepartment().getId());
         jsonObject.put("siteId", employee.getSite().getId());
 
-        ApiClient.updateEntity(BASE_ENDPOINT + "/" + employee.getId(), jsonObject, onSuccess);
+        ApiClient.updateEntity(BASE_ENDPOINT + "/" + employee.getId(), jsonObject, null);
     }
 
     public void deleteEmployee(Employee employee) {

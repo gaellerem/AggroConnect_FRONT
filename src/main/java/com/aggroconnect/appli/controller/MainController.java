@@ -45,7 +45,7 @@ public class MainController {
                     // Vérifier si la touche "A" est pressée lorsque Ctrl + Alt sont maintenus
                     if (ctrlPressed && altPressed && event.getCode().toString().equals("A")) {
                         // Si la combinaison est correcte, demander un mot de passe
-                        setContent("/com/aggroconnect/appli/fxml/AdminAccess.fxml", null);
+                        setContent("/com/aggroconnect/appli/fxml/AdminAccess.fxml");
                     }
                 }
             });
@@ -67,33 +67,48 @@ public class MainController {
 
                     switch (text) {
                         case "Employés":
-                            setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+                            setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
                             break;
                         case "Sites":
-                            setContent("/com/aggroconnect/appli/fxml/SiteList.fxml", null);
+                            setContent("/com/aggroconnect/appli/fxml/SiteList.fxml");
                             break;
                         case "Services":
-                            setContent("/com/aggroconnect/appli/fxml/DepartmentList.fxml", null);
+                            setContent("/com/aggroconnect/appli/fxml/DepartmentList.fxml");
                             break;
                         case "Statistiques":
-                            setContent("/com/aggroconnect/appli/fxml/EmployeeStats.fxml", null);
+                            setContent("/com/aggroconnect/appli/fxml/EmployeeStats.fxml");
                             break;
                     }
                 }
             });
 
-            setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+            setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
         });
     }
 
+    // surchage de la methode si pas besoin de isEditMode et employee
+    public void setContent(String fxmlPath) {
+        setContent(fxmlPath, null, false);
+    }
+
+    // surchage de la methode si pas besoin de isEditMode
     public void setContent(String fxmlPath, Employee employee) {
+        setContent(fxmlPath, employee, false);
+    }
+
+    public void setContent(String fxmlPath, Employee employee, boolean isEditMode) {
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
             Parent view = loader.load();
 
             if (employee != null) {
-                EmployeeController controller = loader.getController();
-                controller.setEmployee(employee);
+                if (isEditMode) {
+                    EmployeeFormController controller = loader.getController();
+                    controller.setEmployee(employee);
+                } else {
+                    EmployeeController controller = loader.getController();
+                    controller.setEmployee(employee);
+                }
             }
 
             mainContainer.setCenter(view);
@@ -123,43 +138,16 @@ public class MainController {
 
     public void authenticateAdmin() {
         isAdmin = true;
-        setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+        setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
     }
 
     public void logoutAdmin() {
         isAdmin = false;
-        setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+        setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
     }
 
     public boolean isAuthenticated() {
         return isAdmin;
-    }
-
-    public void setEmployeeViewMode(Employee employee, boolean isEditMode) {
-        try {
-            FXMLLoader loader;
-
-            if (isEditMode) {
-                loader = new FXMLLoader(MainApp.class.getResource("/com/aggroconnect/appli/fxml/EmployeeForm.fxml"));
-            } else {
-                loader = new FXMLLoader(MainApp.class.getResource("/com/aggroconnect/appli/fxml/EmployeeView.fxml"));
-            }
-
-            Parent view = loader.load();
-
-            if (isEditMode) {
-                EmployeeFormController controller = loader.getController();
-                controller.setEmployee(employee);
-            } else {
-                EmployeeController controller = loader.getController();
-                controller.setEmployee(employee);
-            }
-
-            mainContainer.setCenter(view);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

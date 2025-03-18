@@ -18,7 +18,7 @@ public class EmployeeFormController {
     @FXML private ComboBox<Site> siteComboBox;
     @FXML private Label errorLabel;
 
-    private Employee currentEmployee;
+    private Employee currentEmployee = null;
     private final EmployeeService employeeService = new EmployeeService();
     private final DepartmentService departmentService = new DepartmentService();
     private final SiteService siteService = new SiteService();
@@ -83,20 +83,24 @@ public class EmployeeFormController {
             return;
         }
 
-        if (currentEmployee == null) {
-            employee = new Employee(0, name, email, landline, cellphone, department, site);
-            employee = employeeService.addEmployee(employee);
-        } else {
-            employee = new Employee(currentEmployee.getId(), name, email, landline, cellphone, department, site);
-            employeeService.updateEmployee(employee, null);
+        try {
+            if (currentEmployee == null) {
+                employee = new Employee(0, name, email, landline, cellphone, department, site);
+                employee = employeeService.addEmployee(employee);
+            } else {
+                employee = new Employee(currentEmployee.getId(), name, email, landline, cellphone, department, site);
+                employeeService.updateEmployee(employee);
+            }
+            MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeView.fxml", employee);
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
         }
-        MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeView.fxml", employee);
     }
 
     @FXML
     private void handleCancel() {
         if (currentEmployee == null) {
-            MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml", null);
+            MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
         } else {
             MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeView.fxml", currentEmployee);
         }
