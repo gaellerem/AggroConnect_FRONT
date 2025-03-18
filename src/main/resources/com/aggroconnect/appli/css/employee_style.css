@@ -1,0 +1,17 @@
+.employee-name {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.employee-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+    -fx-padding: 5px;
+}
+
+.employee-info {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666666;
+}

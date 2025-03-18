@@ -1,0 +1,66 @@
+:focused{
+    -fx-focus-color: #ffbd59;
+    -fx-faint-focus-color: rgba(247, 194, 114, 0.2);
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.button {
+     -fx-background-color: #ffbd59;
+     -fx-text-fill: white;
+     -fx-font-size: 16px;
+     -fx-cursor: hand;
+     -fx-background-radius: 10;
+ }
+
+.button:hover {
+    -fx-background-color: #ff9f1a;
+}
+
+.input-box {
+    -fx-padding: 5 10;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 10;
+    -fx-alignment: center-left;
+    -fx-spacing: 4;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-max-width: 250px;
+    -fx-max-height: 40px;
+}
+.input-box:hover{
+    -fx-border-color: #ffbd59;
+}
+
+.input-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-pref-width: 200px;
+}
+
+.dashboard{
+    -fx-background-color: #ffbd59;
+    -fx-background-radius: 0 10 10 0;
+}
+.dashboard-button {
+    -fx-padding: 5;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.dashboard-button:hover{
+    -fx-background-radius: 0 10 10 0;
+}
+
+.dashboard-button:selected {
+    -fx-background-color: #ff9f1a;
+    -fx-text-fill: white;
+    -fx-background-radius: 0 10 10 0;
+}
+
+.error {
+    -fx-text-fill: red;
+}

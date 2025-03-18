@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" maxWidth="870"
+      stylesheets="@../css/style.css, @../css/list_employee_style.css"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.aggroconnect.appli.controller.EmployeeListController">
+    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="filter">
+        <padding>
+            <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+        </padding>
+        <Button fx:id="addButton" visible="false" onAction="#addEmployee">
+            <graphic>
+                <ImageView fitHeight="24" fitWidth="24">
+                    <Image url="@../images/add.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="246.0" spacing="5" styleClass="input-box">
+            <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                <Image url="@../images/search.png" />
+            </ImageView>
+            <TextField fx:id="searchField" onKeyReleased="#handleSearch" promptText="Rechercher un employé..." styleClass="input-field" />
+        </HBox>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
+                <Label text="Service :" styleClass="filter-label" prefWidth="75"/>
+                <MenuButton fx:id="departmentFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
+                <Button onAction="#clearDepartmentFilter" styleClass="remove-button">
+                    <graphic>
+                        <ImageView fitHeight="24" fitWidth="24">
+                            <Image url="@../images/remove.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="filter-box" spacing="5">
+                <Label text="Site :" styleClass="filter-label" prefWidth="75"/>
+                <MenuButton fx:id="siteFilter" text="Tous" prefHeight="35.0" prefWidth="150.0" onAction="#handleSearch"/>
+                <Button onAction="#clearSiteFilter" styleClass="remove-button" >
+                    <graphic>
+                        <ImageView fitHeight="24" fitWidth="24">
+                            <Image url="@../images/remove.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </HBox>
+    <TableView fx:id="employeeTableView" styleClass="table-view" VBox.vgrow="ALWAYS" onMouseClicked="#handleRowClick">
+        <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="150" text="Nom" />
+            <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" />
+            <TableColumn text="N° téléphone" prefWidth="200">
+                <columns>
+                    <TableColumn fx:id="landlineColumn" prefWidth="100" text="Fixe" />
+                    <TableColumn fx:id="cellphoneColumn" prefWidth="100" text="Mobile" />
+                </columns>
+            </TableColumn>
+            <TableColumn fx:id="departmentColumn" prefWidth="150" text="Service"/>
+            <TableColumn fx:id="siteColumn" prefWidth="150" text="Site"/>
+        </columns>
+    </TableView>
+
+</VBox>

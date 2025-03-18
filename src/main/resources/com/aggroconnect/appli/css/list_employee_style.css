@@ -1,0 +1,30 @@
+.filter {
+    -fx-pref-height: 60;
+}
+
+.filter-box {
+    -fx-padding: 5px;
+}
+
+.filter-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 5px 0 0;
+}
+
+.remove-button {
+    -fx-background-color: transparent;
+}
+
+.remove-button:hover{
+    -fx-background-color: #e3e3e3;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #ffbd59 !important;
+}
+
+.table-view .table-row-cell:selected .cell {
+    -fx-border-color: #dedede;
+    -fx-text-fill: black;
+}
