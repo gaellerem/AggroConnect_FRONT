@@ -14,13 +14,15 @@ import java.util.stream.IntStream;
 
 public class ApiClient {
     private static final OkHttpClient client = new OkHttpClient();
+    private static final String BASE_URL = "http://localhost:8080/api/";
 
-    public static <T> List<T> getList(String url, Function<JSONObject, T> mapper) {
-        Request request = new Request.Builder().url(url).build();
+    public static <T> List<T> getList(String endpoint, Function<JSONObject, T> mapper) {
+        Request request = new Request.Builder().url(BASE_URL + endpoint).build();
 
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                JSONArray jsonArray = new JSONArray(response.body().string());
+                JSONObject jsonResponse = new JSONObject(response.body().string());
+                JSONArray jsonArray = jsonResponse.getJSONArray("data");
                 return IntStream.range(0, jsonArray.length())
                         .mapToObj(i -> mapper.apply(jsonArray.getJSONObject(i)))
                         .collect(Collectors.toList());
@@ -31,10 +33,10 @@ public class ApiClient {
         }
     }
 
-    public static void addEntity(String url, JSONObject jsonObject, Runnable onSuccess) {
+    public static void addEntity(String endpoint, JSONObject jsonObject, Runnable onSuccess) {
         RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.parse("application/json"));
         Request request = new Request.Builder()
-                .url(url)
+                .url(BASE_URL + endpoint)
                 .post(body)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -42,10 +44,10 @@ public class ApiClient {
         executeRequest(request, onSuccess);
     }
 
-    public static Employee addEmployee(String url, JSONObject jsonObject, Function<JSONObject, Employee> mapper) {
+    public static Employee addEmployee(String endpoint, JSONObject jsonObject, Function<JSONObject, Employee> mapper) {
         RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.parse("application/json"));
         Request request = new Request.Builder()
-                .url(url)
+                .url(BASE_URL + endpoint)
                 .post(body)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -53,7 +55,8 @@ public class ApiClient {
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 JSONObject responseObject = new JSONObject(response.body().string());
-                return mapper.apply(responseObject);
+                JSONObject data = responseObject.getJSONObject("data");
+                return mapper.apply(data);
             } else {
                 throw new IOException("Échec de la requête : " + response.code());
             }
@@ -62,10 +65,11 @@ public class ApiClient {
         }
     }
 
-    public static void updateEntity(String url, JSONObject jsonObject, Runnable onSuccess) {
+
+    public static void updateEntity(String endpoint, JSONObject jsonObject, Runnable onSuccess) {
         RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.parse("application/json"));
         Request request = new Request.Builder()
-                .url(url)
+                .url(BASE_URL + endpoint)
                 .put(body)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -73,9 +77,9 @@ public class ApiClient {
         executeRequest(request, onSuccess);
     }
 
-    public static void deleteEntity(String url) {
+    public static void deleteEntity(String endpoint) {
         Request request = new Request.Builder()
-                .url(url)
+                .url(BASE_URL + endpoint)
                 .delete()
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -102,7 +106,10 @@ public class ApiClient {
         String errorMessage = "Échec de la requête : " + response.code();
 
         if (!responseBody.isEmpty()) {
-            errorMessage += "\n" + responseBody;
+            JSONObject errorResponse = new JSONObject(responseBody);
+            // récupère le message d'erreur sinon en renseigne un par défaut
+            String message = errorResponse.optString("message", "Aucune description d'erreur fournie.");
+            errorMessage += "\n" + message;
         }
 
         switch (response.code()) {
@@ -113,4 +120,5 @@ public class ApiClient {
             default -> throw new IOException(errorMessage);
         }
     }
+
 }

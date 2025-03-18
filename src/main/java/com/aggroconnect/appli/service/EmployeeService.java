@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public class EmployeeService {
 
-    private static final String BASE_URL = "http://localhost:8080/api/employee";
+    private static final String BASE_ENDPOINT = "employee";
 
     private static final Function<JSONObject, Employee> employeeMapper = obj -> {
         int id = obj.getInt("id");
@@ -29,7 +29,7 @@ public class EmployeeService {
     };
 
     public List<Employee> getEmployees() {
-        return ApiClient.getList(BASE_URL, employeeMapper);
+        return ApiClient.getList(BASE_ENDPOINT, employeeMapper);
     }
 
     public Employee addEmployee(Employee employee) {
@@ -41,7 +41,11 @@ public class EmployeeService {
         jsonObject.put("departmentId", employee.getDepartment().getId());
         jsonObject.put("siteId", employee.getSite().getId());
 
-        return ApiClient.addEmployee(BASE_URL, jsonObject, employeeMapper);
+        // Ajoute l'employé et extrait les données depuis "data"
+        return ApiClient.addEmployee(BASE_ENDPOINT, jsonObject, jsonResponse -> {
+            JSONObject data = jsonResponse.getJSONObject("data"); // extraction de "data"
+            return employeeMapper.apply(data);  // mapper l'objet de la réponse
+        });
     }
 
     public void updateEmployee(Employee employee, Runnable onSuccess) {
@@ -54,10 +58,10 @@ public class EmployeeService {
         jsonObject.put("departmentId", employee.getDepartment().getId());
         jsonObject.put("siteId", employee.getSite().getId());
 
-        ApiClient.updateEntity(BASE_URL + "/" + employee.getId(), jsonObject, onSuccess);
+        ApiClient.updateEntity(BASE_ENDPOINT + "/" + employee.getId(), jsonObject, onSuccess);
     }
 
     public void deleteEmployee(Employee employee) {
-        ApiClient.deleteEntity(BASE_URL + "/" + employee.getId());
+        ApiClient.deleteEntity(BASE_ENDPOINT + "/" + employee.getId());
     }
 }

@@ -6,10 +6,10 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class DepartmentService {
-    private static final String BASE_URL = "http://localhost:8080/api/department";
+    private static final String BASE_ENDPOINT = "department";
 
     public List<Department> getDepartments() {
-        return ApiClient.getList(BASE_URL, json ->
+        return ApiClient.getList(BASE_ENDPOINT, json ->
                 new Department(json.getInt("id"), json.getString("name"))
         );
     }
@@ -18,7 +18,7 @@ public class DepartmentService {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", department.nameProperty().get());
 
-        ApiClient.addEntity(BASE_URL, jsonObject, onSuccess);
+        ApiClient.addEntity(BASE_ENDPOINT, jsonObject, onSuccess);
     }
 
     public void updateDepartment(Department department, Runnable onSuccess) {
@@ -26,10 +26,10 @@ public class DepartmentService {
         jsonObject.put("id", department.getId());
         jsonObject.put("name", department.nameProperty().get());
 
-        ApiClient.updateEntity(BASE_URL + "/" + department.getId(), jsonObject, onSuccess);
+        ApiClient.updateEntity(BASE_ENDPOINT + "/" + department.getId(), jsonObject, onSuccess);
     }
 
     public void deleteDepartment(Department department) {
-        ApiClient.deleteEntity(BASE_URL + "/" + department.getId());
+        ApiClient.deleteEntity(BASE_ENDPOINT + "/" + department.getId());
     }
 }

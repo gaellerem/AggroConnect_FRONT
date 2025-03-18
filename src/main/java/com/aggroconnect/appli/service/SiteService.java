@@ -6,10 +6,10 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class SiteService {
-    private static final String BASE_URL = "http://localhost:8080/api/site";
+    private static final String BASE_ENDPOINT = "site";
 
     public List<Site> getSites() {
-        return ApiClient.getList(BASE_URL, json ->
+        return ApiClient.getList(BASE_ENDPOINT, json ->
                 new Site(json.getInt("id"), json.getString("city"))
         );
     }
@@ -18,7 +18,7 @@ public class SiteService {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("city", site.cityProperty().get());
 
-        ApiClient.addEntity(BASE_URL, jsonObject, onSuccess);
+        ApiClient.addEntity(BASE_ENDPOINT, jsonObject, onSuccess);
     }
 
     public void updateSite(Site site, Runnable onSuccess) {
@@ -26,10 +26,10 @@ public class SiteService {
         jsonObject.put("id", site.getId());
         jsonObject.put("city", site.cityProperty().get());
 
-        ApiClient.updateEntity(BASE_URL + "/" + site.getId(), jsonObject, onSuccess);
+        ApiClient.updateEntity(BASE_ENDPOINT + "/" + site.getId(), jsonObject, onSuccess);
     }
 
     public void deleteSite(Site site) {
-        ApiClient.deleteEntity(BASE_URL + "/" + site.getId());
+        ApiClient.deleteEntity(BASE_ENDPOINT + "/" + site.getId());
     }
 }
