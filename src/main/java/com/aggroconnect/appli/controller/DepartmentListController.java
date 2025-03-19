@@ -11,7 +11,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.List;
 import java.util.Optional;
 
 public class DepartmentListController {
@@ -22,12 +21,19 @@ public class DepartmentListController {
     @FXML
     private TableColumn<Department, Void> deleteColumn;
 
+    private final ObservableList<Department> departments = FXCollections.observableArrayList();
     private final DepartmentService departmentService = new DepartmentService();
 
     @FXML
     public void initialize() {
+        // liaison de la liste de données à la TableView
+        departmentTableView.setItems(departments);
+
+        // lier les colonnes aux propriétés de l'objet Department
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        // gérer la modification d'un item
         nameColumn.setOnEditCommit(event -> {
             Department department = event.getRowValue();
             department.nameProperty().set(event.getNewValue());
@@ -38,8 +44,6 @@ public class DepartmentListController {
                 showAlert(Alert.AlertType.ERROR, "Erreur", "La mise à jour a échoué", e.getMessage()).showAndWait();
                 department.nameProperty().set(event.getOldValue());
             }
-
-            loadData();
         });
 
         // gérer la suppression d'un item
@@ -71,6 +75,7 @@ public class DepartmentListController {
         });
 
         departmentTableView.setEditable(true);
+        // chargement des données
         loadData();
     }
 
@@ -83,15 +88,13 @@ public class DepartmentListController {
     }
 
     private void loadData() {
-        List<Department> siteList = departmentService.getDepartments();
-        ObservableList<Department> departments = FXCollections.observableArrayList(siteList);
-        departmentTableView.setItems(departments);
+        departments.setAll(departmentService.getDepartments());
     }
 
     @FXML
     public void addDepartment() {
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Ajouter un Service");
+        dialog.setTitle("Ajouter un service");
         dialog.setHeaderText(null);
         dialog.setContentText("Nom du service :");
 

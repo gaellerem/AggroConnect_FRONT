@@ -60,6 +60,7 @@ public class MainController {
                 }
             });
 
+            // écouter le changement de toggle dans la barre d'administration
             menuGroup.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
                 if (newToggle != null) {
                     ToggleButton selectedButton = (ToggleButton) menuGroup.getSelectedToggle();
@@ -81,7 +82,7 @@ public class MainController {
                     }
                 }
             });
-
+            // initialiser sur la page "Employés"
             setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
         });
     }
@@ -101,18 +102,19 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
             Parent view = loader.load();
 
+            // si employee est renseigné
             if (employee != null) {
+                // si mode édition, on renvoit vers le formulaire
                 if (isEditMode) {
                     EmployeeFormController controller = loader.getController();
                     controller.setEmployee(employee);
+                //sinon on renvoit vers la vue
                 } else {
                     EmployeeController controller = loader.getController();
                     controller.setEmployee(employee);
                 }
             }
-
             mainContainer.setCenter(view);
-
         } catch (IOException e) {
             showFallbackDashboard(fxmlPath, employee);
         }

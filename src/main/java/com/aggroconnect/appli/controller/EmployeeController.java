@@ -8,11 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 
 public class EmployeeController {
-    @FXML
-    private VBox employeePane;
     @FXML
     private Button editButton;
     @FXML
@@ -23,8 +20,9 @@ public class EmployeeController {
 
     private Employee employee;
     private final EmployeeService employeeService = new EmployeeService();
+
     public void initialize() {
-        employeePane.setUserData(this);
+        // afficher les boutons modifier et supprimer uniquement si admin connecté
         editButton.setVisible(MainApp.getMainController().isAuthenticated());
         deleteButton.setVisible(MainApp.getMainController().isAuthenticated());
     }

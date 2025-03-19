@@ -11,7 +11,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.List;
 import java.util.Optional;
 
 public class SiteListController {
@@ -23,15 +22,19 @@ public class SiteListController {
     @FXML
     private TableColumn<Site, Void> deleteColumn;
 
+    private final ObservableList<Site> sites = FXCollections.observableArrayList();
     private final SiteService siteService = new SiteService();
 
     @FXML
     public void initialize() {
-        // lier les colonnes aux propriétés de l'objet Employee
+        // liaison de la liste de données à la TableView
+        siteTableView.setItems(sites);
+
+        // lier les colonnes aux propriétés de l'objet Site
         cityColumn.setCellValueFactory(cellData -> cellData.getValue().cityProperty());
-        
-        // gérer la modification d'un élément
         cityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        // gérer la modification d'un item
         cityColumn.setOnEditCommit(event -> {
             Site site = event.getRowValue();
             site.cityProperty().set(event.getNewValue());
@@ -92,10 +95,7 @@ public class SiteListController {
     }
 
     private void loadData() {
-        // Charger les sites
-        List<Site> siteList = siteService.getSites();
-        ObservableList<Site> sites = FXCollections.observableArrayList(siteList);
-        siteTableView.setItems(sites);
+        sites.setAll(siteService.getSites());
     }
 
     @FXML
