@@ -21,21 +21,22 @@ public class EmployeeStatsController {
 
     @FXML
     public void initialize() {
+        // charger les employés
         List<Employee> employees = employeeService.getEmployees();
         generateDepartmentStats(employees);
         generateSiteStats(employees);
     }
 
     private void generateDepartmentStats(List<Employee> employees) {
+        // créer un dictionnaire avec pour clé le nom du service et en valeur le nombre d'occurence
         Map<String, Integer> departmentCounts = new HashMap<>();
-
         for (Employee employee : employees) {
             String department = employee.getDepartment().nameProperty().get();
             departmentCounts.put(department, departmentCounts.getOrDefault(department, 0) + 1);
         }
 
+        // créer la liste de data pour le graphique
         ObservableList<PieChart.Data> departmentData = FXCollections.observableArrayList();
-
         for (Map.Entry<String, Integer> entry : departmentCounts.entrySet()) {
             departmentData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }
@@ -44,15 +45,15 @@ public class EmployeeStatsController {
     }
 
     private void generateSiteStats(List<Employee> employees) {
+        // créer un dictionnaire avec pour clé la ville du site et en valeur le nombre d'occurence
         Map<String, Integer> siteCounts = new HashMap<>();
-
         for (Employee employee : employees) {
             String site = employee.getSite().cityProperty().get();
             siteCounts.put(site, siteCounts.getOrDefault(site, 0) + 1);
         }
 
+        // créer la liste de data pour le graphique
         ObservableList<PieChart.Data> siteData = FXCollections.observableArrayList();
-
         for (Map.Entry<String, Integer> entry : siteCounts.entrySet()) {
             siteData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }

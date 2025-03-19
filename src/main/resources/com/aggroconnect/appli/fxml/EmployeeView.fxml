@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.HBox?>
-<VBox fx:id="employeePane" alignment="TOP_CENTER" spacing="20"
+<VBox alignment="TOP_CENTER" spacing="20"
       stylesheets="@../css/style.css, @../css/employee_style.css"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"

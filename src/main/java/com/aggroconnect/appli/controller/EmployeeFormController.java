@@ -26,11 +26,11 @@ public class EmployeeFormController {
     @FXML
     public void initialize() {
 
-        // Charger les départements
+        // Charger les services
         List<Department> departmentList = departmentService.getDepartments();
         ObservableList<Department> departments = FXCollections.observableArrayList(departmentList);
         departmentComboBox.getItems().addAll(departments);
-        // Définir comment afficher le nom du département
+        // Définir comment afficher le nom du service
         departmentComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Department department, boolean empty) {
@@ -40,11 +40,11 @@ public class EmployeeFormController {
         });
         departmentComboBox.setButtonCell(departmentComboBox.getCellFactory().call(null));
 
+        // Charger les site
         List<Site> siteList = siteService.getSites();
         ObservableList<Site> sites = FXCollections.observableArrayList(siteList);
         siteComboBox.getItems().addAll(sites);
         // Définir comment afficher la ville du site
-
         siteComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Site site, boolean empty) {
@@ -78,6 +78,7 @@ public class EmployeeFormController {
         Department department = departmentComboBox.getValue();
         Site site = siteComboBox.getValue();
 
+        // validation des champs
         if (name.isEmpty() || email.isEmpty() || landline.isEmpty() || cellphone.isEmpty() || department == null || site == null) {
             errorLabel.setText("Veuillez remplir tous les champs");
             return;
@@ -99,8 +100,10 @@ public class EmployeeFormController {
 
     @FXML
     private void handleCancel() {
+        // si creation, retour à la liste
         if (currentEmployee == null) {
             MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeList.fxml");
+        // si modification, retour à la vue de l'employé
         } else {
             MainApp.getMainController().setContent("/com/aggroconnect/appli/fxml/EmployeeView.fxml", currentEmployee);
         }

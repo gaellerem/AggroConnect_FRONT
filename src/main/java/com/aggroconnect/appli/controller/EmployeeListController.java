@@ -80,13 +80,15 @@ public class EmployeeListController {
     }
 
     private void loadData() {
+        // charger les employés
         List<Employee> employeesList = employeeService.getEmployees();
         employees = FXCollections.observableArrayList(employeesList);
         employeeTableView.setItems(employees);
 
-        // Charger les départements
+        // Charger les services
         List<Department> departmentList = departmentService.getDepartments();
         departments = FXCollections.observableArrayList(departmentList);
+        // définir comment afficher les services
         for (Department department : departmentList) {
             CheckMenuItem item = new CheckMenuItem(department.nameProperty().get());
             departmentFilter.getItems().add(item);
@@ -99,6 +101,7 @@ public class EmployeeListController {
         // Charger les sites
         List<Site> siteList = siteService.getSites();
         sites = FXCollections.observableArrayList(siteList);
+        // définir comment afficher les sites
         for (Site site : siteList) {
             CheckMenuItem item = new CheckMenuItem(site.cityProperty().get());
             siteFilter.getItems().add(item);
